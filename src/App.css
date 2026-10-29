@@ -1,0 +1,1350 @@
+
+/* ================================
+   GLOBAL RESET
+================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  font-family: "Nunito", "Segoe UI", sans-serif;
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.login-page,
+.welcome-screen {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ================================
+   LOGIN PAGE BACKGROUND
+================================ */
+
+.login-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 4%;
+  isolation: isolate;
+  background:
+    radial-gradient(
+      circle at 25% 45%,
+      rgba(255, 198, 35, 0.12),
+      transparent 30%
+    ),
+    linear-gradient(135deg, #071d2c, #102e47 55%, #071b29);
+  color: #183b60;
+}
+
+.background-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      rgba(4, 21, 34, 0.72),
+      rgba(4, 21, 34, 0.84)
+    );
+  pointer-events: none;
+}
+
+.floating-banana {
+  position: absolute;
+  z-index: -1;
+  font-size: clamp(20px, 2.5vw, 38px);
+  pointer-events: none;
+  animation: float 4s ease-in-out infinite;
+}
+
+.banana-one {
+  top: 12%;
+  left: 5%;
+}
+
+.banana-two {
+  right: 5%;
+  bottom: 13%;
+  animation-delay: 1s;
+}
+
+.banana-three {
+  top: 42%;
+  left: 49%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ================================
+   MAIN TWO-COLUMN LAYOUT
+================================ */
+
+.login-layout {
+  width: 100%;
+  max-width: 1450px;
+  height: 100%;
+  max-height: 820px;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr);
+  align-items: center;
+
+  gap: clamp(24px, 4vw, 65px);
+  margin: 0 auto;
+}
+
+/* ================================
+   LEFT HERO SECTION
+================================ */
+
+.hero-section {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  position: relative;
+  padding: 15px 0;
+}
+
+.brand-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: #ffd52a;
+  font-size: clamp(20px, 2.3vw, 34px);
+  font-weight: 1000;
+  letter-spacing: 0.5px;
+  line-height: 1.15;
+  text-shadow: 0 3px 0 #a96800;
+
+  margin-bottom: 10px;
+}
+
+.brand-icon {
+  font-size: 1.35em;
+}
+
+.hero-character {
+  position: relative;
+  width: 100%;
+  height: clamp(180px, 34vh, 300px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+.character-glow {
+  position: absolute;
+  width: min(65%, 300px);
+  aspect-ratio: 1;
+
+  border-radius: 50%;
+  background: rgba(255, 207, 38, 0.16);
+  box-shadow: 0 0 70px rgba(255, 207, 38, 0.12);
+}
+
+.character-art {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  width: auto;
+  height: 95%;
+  max-width: 75%;
+  max-height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.banana-prop {
+  position: absolute;
+  z-index: 2;
+
+  right: 12%;
+  bottom: 14%;
+
+  font-size: clamp(28px, 3.2vw, 46px);
+  transform: rotate(-15deg);
+}
+
+.hero-copy {
+  width: 100%;
+  max-width: 680px;
+  margin-top: 5px;
+}
+
+.hero-copy h1 {
+  margin: 0 0 12px;
+
+  color: #fff;
+  font-size: clamp(27px, 3.1vw, 46px);
+  font-weight: 1000;
+  line-height: 1.12;
+  letter-spacing: -1px;
+
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.hero-copy h1 span {
+  color: #ffd52a;
+}
+
+.hero-copy > p {
+  margin: 0 0 18px;
+
+  color: #edf4fb;
+  font-size: clamp(13px, 1.1vw, 17px);
+  line-height: 1.5;
+}
+
+.feature-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.feature-badges span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 14px;
+
+  color: #fff;
+  font-size: clamp(11px, 0.95vw, 14px);
+  font-weight: 800;
+
+  background: rgba(5, 26, 43, 0.76);
+  border: 1px solid rgba(255, 213, 42, 0.7);
+  border-radius: 30px;
+}
+
+/* ================================
+   LOGIN CARD
+================================ */
+
+.login-card {
+  position: relative;
+
+  width: 100%;
+  height: min(100%, 790px);
+  min-height: 0;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: clamp(22px, 3vh, 36px) clamp(24px, 3vw, 48px);
+
+  background: #fff8e9;
+  border: 7px solid #ffd52a;
+  outline: 5px solid #1675bf;
+  border-radius: 42px;
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.7);
+
+  overflow: hidden;
+}
+
+.card-top-decoration {
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  gap: 65px;
+
+  font-size: 24px;
+  pointer-events: none;
+}
+
+.login-heading {
+  flex-shrink: 0;
+  text-align: center;
+  margin-bottom: clamp(18px, 3vh, 32px);
+}
+
+.login-icon {
+  width: clamp(54px, 7vh, 76px);
+  height: clamp(54px, 7vh, 76px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto 12px;
+
+  font-size: clamp(25px, 3vh, 36px);
+
+  background: #ffd52a;
+  border-radius: 24px;
+  box-shadow: 0 5px 0 #dca500;
+}
+
+.login-heading h2 {
+  margin: 0 0 10px;
+
+  color: #183b60;
+  font-size: clamp(24px, 2.5vw, 36px);
+  font-weight: 1000;
+  line-height: 1.15;
+}
+
+.login-heading p {
+  margin: 0;
+
+  color: #7a8ca5;
+  font-size: clamp(13px, 1.2vw, 17px);
+  line-height: 1.4;
+}
+
+/* ================================
+   FORM
+================================ */
+
+.login-card form {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.form-group {
+  margin-bottom: clamp(15px, 2.5vh, 25px);
+}
+
+.form-group > label {
+  display: block;
+  margin-bottom: 10px;
+
+  color: #183b60;
+  font-size: clamp(12px, 1.05vw, 16px);
+  font-weight: 1000;
+  letter-spacing: 1.3px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  height: clamp(52px, 7vh, 68px);
+
+  padding: 0 18px;
+
+  background: #fff;
+  border: 2px solid #dce5ef;
+  border-radius: 19px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #1684e8;
+  box-shadow: 0 0 0 4px rgba(22, 132, 232, 0.1);
+}
+
+.input-icon {
+  flex-shrink: 0;
+  font-size: 22px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+
+  padding: 0;
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: #183b60;
+
+  font-size: clamp(13px, 1.1vw, 17px);
+  font-weight: 700;
+}
+
+.input-wrapper input::placeholder {
+  color: #9baabe;
+  opacity: 1;
+}
+
+.password-toggle {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px;
+  border: none;
+  background: transparent;
+
+  font-size: 18px;
+}
+
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin: 0 0 clamp(17px, 2.5vh, 26px);
+}
+
+.remember-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #75869e;
+  font-size: clamp(11px, 0.95vw, 14px);
+  white-space: nowrap;
+}
+
+.remember-option input {
+  width: 17px;
+  height: 17px;
+  accent-color: #1684e8;
+}
+
+.text-button {
+  padding: 0;
+  border: none;
+
+  background: transparent;
+  color: #0876d1;
+
+  font-size: clamp(11px, 0.95vw, 14px);
+  font-weight: 1000;
+}
+
+.text-button:hover {
+  color: #07569b;
+  text-decoration: underline;
+}
+
+.error-message {
+  margin: 0 0 12px;
+  color: #d52b2b;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* ================================
+   BUTTONS
+================================ */
+
+.primary-button {
+  width: 100%;
+  min-height: clamp(54px, 7.5vh, 72px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  padding: 12px 20px;
+
+  border: none;
+  border-radius: 19px;
+
+  background: linear-gradient(180deg, #ffe45a 0%, #ffd126 100%);
+  box-shadow: 0 6px 0 #dca000;
+
+  color: #183b60;
+  font-size: clamp(17px, 1.7vw, 25px);
+  font-weight: 1000;
+  letter-spacing: 1px;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 #dca000;
+}
+
+.primary-button:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #dca000;
+}
+
+.login-button span {
+  font-size: 1.25em;
+}
+
+/* ================================
+   SIGNUP AREA
+================================ */
+
+.signup-section {
+  flex-shrink: 0;
+  text-align: center;
+
+  margin-top: clamp(18px, 3vh, 30px);
+}
+
+.signup-section p {
+  margin: 0 0 15px;
+
+  color: #7a8ca5;
+  font-size: clamp(13px, 1.1vw, 17px);
+}
+
+.signup-button {
+  font-size: clamp(13px, 1.15vw, 17px);
+}
+
+/* ================================
+   CARD FOOTER
+================================ */
+
+.card-footer {
+  width: 100%;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  margin-top: clamp(18px, 3vh, 30px);
+  padding-top: 16px;
+
+  border-top: 1px solid #eadfca;
+
+  color: #aa821a;
+  font-size: clamp(10px, 0.85vw, 13px);
+  font-weight: 1000;
+  letter-spacing: 1.5px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.card-footer span {
+  font-size: 15px;
+}
+
+/* ================================
+   PAGE FOOTER
+================================ */
+
+.page-footer {
+  position: absolute;
+  bottom: 14px;
+  left: 4%;
+
+  width: calc(46% - 20px);
+
+  color: rgba(255, 255, 255, 0.75);
+  font-size: clamp(9px, 0.85vw, 13px);
+  font-weight: 1000;
+  letter-spacing: 1.5px;
+  line-height: 1.4;
+  text-align: center;
+
+  pointer-events: none;
+}
+
+/* ================================
+   WELCOME SCREEN
+================================ */
+
+.welcome-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    radial-gradient(circle at top, #204a69, transparent 55%),
+    #071d2c;
+}
+
+.welcome-card {
+  width: min(100%, 500px);
+  padding: 42px;
+
+  text-align: center;
+
+  background: #fff8e9;
+  border: 6px solid #ffd52a;
+  outline: 4px solid #1675bf;
+  border-radius: 32px;
+
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
+}
+
+.welcome-banana {
+  font-size: 60px;
+}
+
+.welcome-eyebrow {
+  color: #b58b1a;
+  font-weight: 1000;
+  letter-spacing: 2px;
+}
+
+.welcome-card h1 {
+  color: #183b60;
+  font-size: clamp(30px, 4vw, 44px);
+  overflow-wrap: anywhere;
+}
+
+.welcome-card h1 span {
+  color: #e7aa00;
+}
+
+.welcome-description {
+  color: #71839b;
+  margin-bottom: 28px;
+}
+
+.back-button {
+  margin-top: 22px;
+  padding: 10px 20px;
+
+  color: #0876d1;
+  font-weight: 800;
+
+  background: transparent;
+  border: none;
+}
+
+/* ================================
+   SMALLER DESKTOP / LAPTOP
+================================ */
+
+@media (max-width: 1000px) {
+  .login-page {
+    padding: 18px 3%;
+  }
+
+  .login-layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(390px, 1.1fr);
+    gap: 25px;
+  }
+
+  .login-card {
+    padding: 24px;
+    border-radius: 32px;
+  }
+
+  .brand-label {
+    font-size: clamp(18px, 2.4vw, 27px);
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(25px, 3vw, 34px);
+  }
+
+  .feature-badges {
+    gap: 6px;
+  }
+
+  .feature-badges span {
+    padding: 8px 10px;
+  }
+}
+
+/* ================================
+   SHORT SCREENS
+   Keep all login content visible.
+================================ */
+
+@media (max-height: 800px) {
+  .login-page {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .login-layout {
+    gap: 28px;
+  }
+
+  .login-card {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-width: 6px;
+    border-radius: 32px;
+  }
+
+  .login-heading {
+    margin-bottom: 16px;
+  }
+
+  .login-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+    border-radius: 16px;
+    font-size: 25px;
+  }
+
+  .login-heading h2 {
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+
+  .login-heading p {
+    font-size: 13px;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+
+  .form-group > label {
+    margin-bottom: 7px;
+  }
+
+  .input-wrapper {
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .form-options {
+    margin-bottom: 16px;
+  }
+
+  .primary-button {
+    min-height: 52px;
+    border-radius: 14px;
+  }
+
+  .signup-section {
+    margin-top: 17px;
+  }
+
+  .signup-section p {
+    margin-bottom: 10px;
+  }
+
+  .card-footer {
+    margin-top: 16px;
+    padding-top: 11px;
+  }
+
+  .hero-character {
+    height: clamp(140px, 27vh, 220px);
+  }
+
+  .hero-copy h1 {
+    margin-bottom: 8px;
+  }
+
+  .hero-copy > p {
+    margin-bottom: 12px;
+  }
+
+  .feature-badges span {
+    font-size: 11px;
+    padding: 7px 9px;
+  }
+
+  .page-footer {
+    bottom: 8px;
+  }
+}
+
+/* ================================
+   NARROW WINDOWS
+================================ */
+
+@media (max-width: 700px) {
+  .login-page {
+    padding: 12px;
+  }
+
+  .login-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-section,
+  .page-footer {
+    display: none;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: 790px;
+
+    padding: 25px;
+  }
+
+  .login-heading h2 {
+    font-size: 27px;
+  }
+
+  .card-footer {
+    letter-spacing: 1px;
+  }
+}
+
+/* ================================
+   VERY SHORT WINDOWS
+================================ */
+
+@media (max-height: 650px) {
+  .login-card {
+    padding: 12px 22px;
+    border-radius: 25px;
+  }
+
+  .login-heading {
+    margin-bottom: 10px;
+  }
+
+  .login-icon {
+    display: none;
+  }
+
+  .login-heading h2 {
+    font-size: 23px;
+  }
+
+  .login-heading p {
+    font-size: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 9px;
+  }
+
+  .input-wrapper {
+    height: 42px;
+  }
+
+  .form-options {
+    margin-bottom: 10px;
+  }
+
+  .primary-button {
+    min-height: 44px;
+  }
+
+  .signup-section {
+    margin-top: 10px;
+  }
+
+  .signup-section p {
+    margin-bottom: 6px;
+  }
+
+  .card-footer {
+    margin-top: 10px;
+    padding-top: 7px;
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================
+   REGISTRATION PAGE ALIGNMENT FIX
+   Add this at the BOTTOM of App.css
+========================================= */
+
+/* Keep the registration page within the viewport */
+.login-page {
+  width: 100%;
+  height: 100vh;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Keep the two-column layout aligned */
+.login-layout {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+/* Keep the registration card inside the available height */
+.login-card {
+  width: 100%;
+  max-width: 730px;
+  height: auto;
+  max-height: calc(100vh - 36px);
+  min-height: 0;
+  margin: 0 auto;
+  padding: 32px 28px 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Stop the decorative bananas from overlapping the heading */
+.card-top-decoration {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 55px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Keep the heading below the decoration */
+.login-heading {
+  position: relative;
+  z-index: 2;
+  margin-top: 0;
+  padding-top: 8px;
+  text-align: center;
+}
+
+.login-heading h2 {
+  margin: 12px 0 8px;
+}
+
+.login-heading p {
+  margin: 0 0 22px;
+}
+
+/* Compact, consistent form spacing */
+.login-card .form-group {
+  margin-bottom: 16px;
+}
+
+.login-card .form-group label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.login-card .input-wrapper {
+  width: 100%;
+  min-height: 52px;
+  box-sizing: border-box;
+}
+
+.login-card .input-wrapper input {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+
+/* Keep the create-account button inside the card */
+.login-card .primary-button {
+  width: 100%;
+  min-height: 54px;
+  margin-top: 8px;
+}
+
+/* Reduce the space below the button */
+.login-card .signup-section {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.login-card .signup-section p {
+  margin: 8px 0 10px;
+}
+
+.login-card .signup-button {
+  margin-bottom: 8px;
+}
+
+/* Keep the footer within the card */
+.login-card .card-footer {
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+/* Prevent the outer footer from overlapping the card */
+.page-footer {
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Fit smaller laptop screens */
+@media (max-height: 800px) {
+  .login-card {
+    padding: 24px 24px 14px;
+    max-height: calc(100vh - 24px);
+  }
+
+  .login-heading p {
+    margin-bottom: 16px;
+  }
+
+  .login-card .form-group {
+    margin-bottom: 12px;
+  }
+
+  .login-card .input-wrapper {
+    min-height: 46px;
+  }
+
+  .login-card .primary-button {
+    min-height: 48px;
+  }
+
+  .login-card .signup-section {
+    margin-top: 8px;
+  }
+
+  .login-card .card-footer {
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+}
+
+/* Stack the sections on narrow screens */
+@media (max-width: 900px) {
+  .login-page {
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .login-layout {
+    height: auto;
+    min-height: 100vh;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px 16px;
+  }
+
+  .hero-section {
+    display: none;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 600px;
+    max-height: none;
+    margin: auto;
+  }
+
+  .page-footer {
+    display: none;
+  }
+}
+
+/* =========================================
+   REGISTRATION PAGE — NO SCROLLING
+   ========================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+.register-page,
+.registration-page {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-layout,
+.registration-layout {
+  width: 100%;
+  height: 100%;
+  max-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 12px 3%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Registration card */
+.register-card,
+.registration-card {
+  width: 100%;
+  max-height: calc(100dvh - 24px);
+  min-height: 0;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Reduce vertical spacing between form fields */
+.register-card .form-group,
+.registration-card .form-group {
+  margin-bottom: 10px;
+}
+
+.register-card label,
+.registration-card label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.register-card .input-wrapper,
+.registration-card .input-wrapper {
+  min-height: 44px;
+  height: 44px;
+}
+
+.register-card input:not([type="checkbox"]),
+.registration-card input:not([type="checkbox"]) {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.register-card .primary-button,
+.registration-card .primary-button {
+  min-height: 48px;
+  margin-top: 8px;
+  padding: 10px 16px;
+}
+
+.register-card .card-top-decoration,
+.registration-card .card-top-decoration {
+  margin-bottom: 8px;
+}
+
+.register-card .signup-section,
+.registration-card .signup-section {
+  margin-top: 10px;
+}
+
+.register-card .card-footer,
+.registration-card .card-footer {
+  margin-top: 10px;
+}
+
+/* Laptop and smaller desktop screens */
+@media (max-height: 800px) {
+  .register-layout,
+  .registration-layout {
+    gap: 16px;
+    padding: 8px 3%;
+  }
+
+  .register-card,
+  .registration-card {
+    padding: 14px 24px;
+  }
+
+  .register-card .form-group,
+  .registration-card .form-group {
+    margin-bottom: 7px;
+  }
+
+  .register-card .input-wrapper,
+  .registration-card .input-wrapper {
+    height: 40px;
+    min-height: 40px;
+  }
+
+  .register-card .primary-button,
+  .registration-card .primary-button {
+    min-height: 44px;
+    margin-top: 5px;
+  }
+
+  .register-card .signup-section,
+  .registration-card .signup-section {
+    margin-top: 6px;
+  }
+}
+
+/* Mobile layout */
+@media (max-width: 760px) {
+  .register-layout,
+  .registration-layout {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 8px;
+  }
+
+  .register-layout .hero-section,
+  .registration-layout .hero-section {
+    display: none;
+  }
+
+  .register-card,
+  .registration-card {
+    width: 100%;
+    padding: 14px 18px;
+  }
+}
+
+/* ===== REMOVE SCROLLING FROM LOGIN PAGE ===== */
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.login-layout {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.login-card {
+  height: auto;
+  max-height: calc(100dvh - 40px);
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Prevent form elements from making the card too tall */
+.login-card form {
+  min-height: 0;
+}
+
+.login-card .form-group {
+  margin-bottom: 14px;
+}
+
+.login-card .input-wrapper {
+  min-height: 54px;
+}
+
+.login-card .login-heading {
+  margin-bottom: 22px;
+}
+
+.login-card .signup-section {
+  margin-top: 14px;
+}
+
+.login-card .card-footer {
+  margin-top: 16px;
+}
+
+/* Keep the page usable on smaller screens */
+@media (max-height: 750px) {
+  .login-card {
+    padding-top: 20px;
+    padding-bottom: 16px;
+  }
+
+  .login-card .login-heading {
+    margin-bottom: 14px;
+  }
+
+  .login-card .form-group {
+    margin-bottom: 10px;
+  }
+
+  .login-card .input-wrapper {
+    min-height: 46px;
+  }
+
+  .login-card .signup-section {
+    margin-top: 8px;
+  }
+
+  .login-card .card-footer {
+    margin-top: 10px;
+  }
+}
