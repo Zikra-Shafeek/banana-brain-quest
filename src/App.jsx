@@ -2,10 +2,12 @@
 import { useState } from "react";
 import "./App.css";
 import ChallengePage from "./ChallengePage";
+import Game from "./Game";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("login");
-
+  const [selectedDifficulty, setSelectedDifficulty] = useState("medium");
+  
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -368,25 +370,38 @@ function App() {
     );
   }
 
+  if (currentPage === "game") {
+    return (
+      <Game
+        username={
+          localStorage.getItem("bananaQuestUsername") || "Player"
+        }
+        difficulty={selectedDifficulty}
+        onNavigate={(page) => setCurrentPage(page)}
+      />
+    );
+  }
+
   if (currentPage === "challenge") {
     return (
       <ChallengePage
-        username={welcomeUsername}
+        username={
+          localStorage.getItem("bananaQuestUsername") || "Player"
+        }
         onNavigate={(page, difficulty) => {
           if (page === "game") {
-            alert(
-              `${difficulty.toUpperCase()} selected. The puzzle screen is next!`
-            );
-          } else if (page === "challenge") {
-            setCurrentPage("challenge");
-          } else {
-            alert(`${page} page will be created next!`);
+            setSelectedDifficulty(difficulty);
           }
+
+          setCurrentPage(page);
         }}
       />
     );
   }
 
+  
+
+  
   /* =========================
      LOGIN PAGE
   ========================= */

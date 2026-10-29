@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import "./ChallengePage.css";
+import factoryBackground from "./assets/factory-background.png";
+import minionImage from "./assets/minLogin-transparent.png";
 
 const difficulties = [
   {
@@ -32,6 +34,11 @@ const difficulties = [
   },
 ];
 
+<main
+  className="challenge-page"
+  style={{ "--factory-background": `url("${factoryBackground}")` }}
+></main>
+
 function ChallengePage({ username = "Player", onNavigate }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState("medium");
 
@@ -40,26 +47,38 @@ function ChallengePage({ username = "Player", onNavigate }) {
   }
 
   function startChallenge() {
-    if (onNavigate) {
+    console.log("Start Challenge clicked!");
+    console.log("Selected difficulty:", selectedDifficulty);
+
+    if (typeof onNavigate === "function") {
       onNavigate("game", selectedDifficulty);
     } else {
-      alert(
-        `${selectedDifficulty.toUpperCase()} challenge selected!`
-      );
+      console.error("onNavigate was not passed from App.jsx");
     }
   }
 
   return (
-    <main className="challenge-page">
+    <main
+      className="challenge-page"
+      style={{ "--factory-background": `url("${factoryBackground}")` }}
+    >
       <header className="challenge-navbar">
-        <div className="challenge-brand">
-          <span>🍌</span>
-          <span>Banana Brain Quest</span>
-          <span>🍌</span>
-        </div>
+        <button
+          type="button"
+          className="challenge-brand"
+          onClick={() => onNavigate?.("welcome")}
+          aria-label="Go to home"
+        >
+          <span className="brand-banana">🍌</span>
+          <span className="brand-title">
+            <strong>Banana Brain</strong>
+            <small>Q U E S T</small>
+          </span>
+        </button>
 
         <nav className="challenge-nav" aria-label="Main navigation">
           <button
+            type="button"
             className="challenge-nav-link active"
             onClick={() => onNavigate?.("challenge")}
           >
@@ -67,6 +86,7 @@ function ChallengePage({ username = "Player", onNavigate }) {
           </button>
 
           <button
+            type="button"
             className="challenge-nav-link"
             onClick={() => onNavigate?.("history")}
           >
@@ -74,6 +94,7 @@ function ChallengePage({ username = "Player", onNavigate }) {
           </button>
 
           <button
+            type="button"
             className="challenge-nav-link"
             onClick={() => onNavigate?.("leaderboard")}
           >
@@ -81,6 +102,7 @@ function ChallengePage({ username = "Player", onNavigate }) {
           </button>
 
           <button
+            type="button"
             className="challenge-profile"
             aria-label={`Player profile: ${username}`}
             onClick={() => onNavigate?.("profile")}
@@ -88,6 +110,8 @@ function ChallengePage({ username = "Player", onNavigate }) {
             <span className="profile-head" />
             <span className="profile-body" />
           </button>
+
+          <span className="challenge-username">{username}</span>
         </nav>
       </header>
 
@@ -96,8 +120,8 @@ function ChallengePage({ username = "Player", onNavigate }) {
 
         <img
           className="challenge-minion"
-          src="/assets/minLogin-transparent.png"
-          alt="Banana Brain Quest character"
+          src={minionImage}
+          alt="Banana Brain Quest Minion"
         />
 
         <div className="challenge-content">
@@ -119,13 +143,9 @@ function ChallengePage({ username = "Player", onNavigate }) {
                 onClick={() => chooseDifficulty(difficulty.id)}
                 aria-pressed={selectedDifficulty === difficulty.id}
               >
-                <span className="difficulty-icon">
-                  {difficulty.icon}
-                </span>
+                <span className="difficulty-icon">{difficulty.icon}</span>
 
-                <span className="difficulty-name">
-                  {difficulty.name}
-                </span>
+                <span className="difficulty-name">{difficulty.name}</span>
 
                 <span className="difficulty-details">
                   <span>◷ {difficulty.timer}</span>
@@ -137,9 +157,7 @@ function ChallengePage({ username = "Player", onNavigate }) {
                 </span>
 
                 {selectedDifficulty === difficulty.id && (
-                  <span className="selected-label">
-                    ✓ SELECTED
-                  </span>
+                  <span className="selected-label">✓ SELECTED</span>
                 )}
               </button>
             ))}

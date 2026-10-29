@@ -1,0 +1,1959 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Oswald:wght@500;600;700&display=swap");
+
+:root {
+  --banana-yellow: #ffca16;
+  --banana-blue: #12334c;
+  --banana-green: #63dd72;
+  --banana-muted: #cbd7e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+/* Main factory background */
+.banana-game {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  color: white;
+  background:
+    linear-gradient(115deg, rgba(8, 29, 45, .76), rgba(8, 29, 45, .48), rgba(8, 29, 45, .7)),
+    url("./assets/factory-background.png") center / cover no-repeat;
+}
+
+/* Navigation */
+.game-navbar {
+  position: relative;
+  z-index: 5;
+  height: 76px;
+  padding: 7px 3.5%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 18px;
+  background: rgba(13, 42, 64, .98);
+  border-bottom: 4px solid var(--banana-yellow);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: white;
+  text-align: left;
+}
+
+.brand-banana {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.brand-words {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  line-height: 1;
+}
+
+.brand-words strong {
+  font-family: "Oswald", sans-serif;
+  font-size: 27px;
+}
+
+.brand-words small {
+  color: var(--banana-yellow);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+.game-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.game-nav-links button {
+  padding: 12px 17px;
+  border: 0;
+  border-radius: 13px;
+  background: transparent;
+  color: #d7e0e8;
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.game-nav-links button:hover {
+  background: rgba(255, 255, 255, .1);
+  color: white;
+}
+
+.game-nav-links button.active {
+  color: #12334c;
+  background: var(--banana-yellow);
+}
+
+.nav-player {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.nav-player-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--banana-yellow);
+  color: #49327c;
+  font-size: 20px;
+}
+
+.nav-player strong {
+  max-width: 190px;
+  overflow: hidden;
+  color: white;
+  font-size: 15px;
+  font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Profile left, game right */
+.game-layout {
+  width: 100%;
+  margin: 0;
+  padding: 12px 2%;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+}
+
+/* Player profile */
+.player-panel {
+  min-width: 0;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid rgba(221, 237, 248, .3);
+  border-radius: 20px;
+  background: rgba(14, 45, 68, .97);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
+  text-align: center;
+}
+
+.profile-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  color: var(--banana-yellow);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+.difficulty-badge {
+  flex-shrink: 0;
+  padding: 8px 11px;
+  border-radius: 30px;
+  background: var(--banana-green);
+  color: #14364a;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.avatar-ring {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin: 10px auto 6px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 5px solid var(--banana-yellow);
+  border-radius: 50%;
+  background: #ffe681;
+}
+
+.avatar-ring img {
+  width: 87%;
+  height: 87%;
+  object-fit: contain;
+}
+
+.level-tag {
+  position: absolute;
+  right: -2px;
+  bottom: 3px;
+  padding: 6px 7px;
+  border-radius: 9px 0 0;
+  background: var(--banana-yellow);
+  color: #12334c;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.player-name {
+  margin: 5px 0 2px;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+
+.player-subtitle {
+  margin: 0 0 9px;
+  color: var(--banana-muted);
+  font-size: 12px;
+}
+
+.stat-card {
+  min-height: 48px;
+  margin-top: 6px;
+  padding: 7px 9px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border: 1px solid rgba(255, 255, 255, .06);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .085);
+  text-align: left;
+}
+
+.stat-icon {
+  width: 25px;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+.stat-card div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-card small {
+  color: #f5f7fa;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .5px;
+}
+
+.stat-card strong {
+  color: var(--banana-yellow);
+  font-size: 19px;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.lives-card strong {
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.mission-note {
+  margin-top: 9px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--banana-muted);
+  font-size: 11px;
+  text-align: left;
+}
+
+.mission-note span {
+  font-size: 18px;
+}
+
+.mission-note p {
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+
+/* Mission heading */
+.game-content {
+  width: 100%;
+  min-width: 0;
+  padding-top: 0;
+}
+
+.mission-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.mission-label {
+  display: inline-block;
+  margin-bottom: 3px;
+  color: var(--banana-yellow);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.6px;
+}
+
+.mission-row h1 {
+  margin: 0;
+  color: white;
+  font-family: "Oswald", sans-serif;
+  font-size: clamp(27px, 2.5vw, 36px);
+  line-height: 1.1;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, .3);
+}
+
+.mission-row p {
+  margin: 4px 0 0;
+  color: #edf3f7;
+  font-size: 13px;
+}
+
+/* Timer */
+.timer-card {
+  min-width: 104px;
+  min-height: 70px;
+  padding: 9px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: 14px;
+  background: var(--banana-yellow);
+  color: #12334c;
+  box-shadow: 0 4px 0 #c59600;
+}
+
+.timer-icon {
+  font-size: 20px;
+}
+
+.timer-card div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.timer-card strong {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.timer-card small {
+  margin-top: 2px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .7px;
+}
+
+.timer-card.urgent {
+  background: #ff8a65;
+  animation: timer-pulse .7s ease-in-out infinite alternate;
+}
+
+/* Progress */
+.progress-heading {
+  margin: 10px 0 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .7px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border-radius: 30px;
+  background: rgba(226, 236, 244, .48);
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--banana-yellow);
+  transition: width .35s ease;
+}
+
+/* Puzzle card: puzzle on left, answer on right */
+.puzzle-card {
+  width: 100%;
+  min-width: 0;
+  margin-top: 10px;
+  padding: 13px 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, .9fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  column-gap: 22px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, .65);
+  border-radius: 20px;
+  background: white;
+  color: #15344b;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .2);
+}
+
+/* Heading across card */
+.puzzle-card-heading {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.puzzle-mini-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: #fff0b5;
+  font-size: 21px;
+}
+
+.puzzle-card-heading h2 {
+  margin: 0;
+  color: #173750;
+  font-family: "Oswald", sans-serif;
+  font-size: 22px;
+}
+
+.puzzle-card-heading p {
+  margin: 2px 0 0;
+  color: #708294;
+  font-size: 11px;
+}
+
+/* Puzzle image */
+.puzzle-image-frame {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  align-self: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border: 2px dashed #d4e0e9;
+  border-radius: 13px;
+  background: #f7fafc;
+}
+
+.api-puzzle-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(38vh, 270px);
+  object-fit: contain;
+  border-radius: 7px;
+  margin: 0;
+}
+
+.puzzle-message {
+  min-height: 80px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  color: #173750;
+  text-align: center;
+}
+
+.puzzle-message p {
+  margin: 0;
+  color: #6d8091;
+  font-size: 12px;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid #dce7ef;
+  border-top-color: var(--banana-yellow);
+  border-radius: 50%;
+  animation: spinner-rotate .8s linear infinite;
+}
+
+.retry-button {
+  padding: 8px 13px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--banana-yellow);
+  color: #173750;
+  font-weight: 900;
+}
+
+/* Answer field and submit button on right */
+.answer-section {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
+  justify-self: stretch;
+  width: 100%;
+  max-width: 420px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.answer-section > label {
+  margin-bottom: 7px;
+  color: #64788a;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-align: left;
+}
+
+.answer-section > input {
+  width: 100%;
+  height: 44px;
+  padding: 7px 12px;
+  border: 2px solid #dce5ed;
+  border-radius: 10px;
+  outline: none;
+  background: white;
+  color: #15344b;
+  font-size: 22px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.answer-section > input:focus {
+  border-color: #e9b500;
+  box-shadow: 0 0 0 3px rgba(255, 202, 22, .19);
+}
+
+.answer-section > input::placeholder {
+  color: #aab8c4;
+}
+
+/* Hide the on-screen number keypad */
+.number-keypad {
+  display: none !important;
+}
+
+/* Submit answer */
+.submit-answer {
+  width: 100%;
+  min-height: 43px;
+  margin-top: 10px;
+  padding: 9px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffda43, #ffc10d);
+  color: #15344b;
+  box-shadow: 0 3px 0 #d7a000;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .7px;
+  cursor: pointer;
+}
+
+.submit-answer:hover:not(:disabled) {
+  filter: brightness(1.03);
+}
+
+.submit-answer:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.submit-answer span {
+  font-size: 17px;
+}
+
+.answer-feedback {
+  margin: 7px 0 0;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: left;
+}
+
+.feedback-good {
+  color: #16804a;
+}
+
+.feedback-bad {
+  color: #c04439;
+}
+
+/* Result modal */
+.game-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  padding: 16px;
+  display: grid;
+  place-items: center;
+  background: rgba(3, 17, 29, .78);
+  backdrop-filter: blur(6px);
+}
+
+.game-modal {
+  width: min(100%, 420px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  padding: 23px;
+  border: 1px solid #e5ebf0;
+  border-radius: 20px;
+  background: white;
+  color: #15344b;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, .35);
+  text-align: center;
+  animation: modal-appear .25s ease-out;
+}
+
+.modal-emoji {
+  margin-bottom: 7px;
+  font-size: 38px;
+}
+
+.game-modal h2 {
+  margin: 0;
+  color: #15344b;
+  font-family: "Oswald", sans-serif;
+  font-size: 29px;
+}
+
+.game-modal > p {
+  margin: 8px 0 14px;
+  color: #6f8090;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.final-score {
+  margin: 14px 0;
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 13px;
+  background: #fff7d9;
+}
+
+.final-score span {
+  color: #73808b;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+}
+
+.final-score strong {
+  color: #15344b;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.final-score small {
+  color: #4f6374;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.modal-secondary {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: 10px;
+  background: #edf2f6;
+  color: #234259;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.modal-secondary:hover {
+  background: #e0e9f0;
+}
+
+/* Animations */
+@keyframes spinner-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes timer-pulse {
+  to { transform: scale(1.03); }
+}
+
+@keyframes modal-appear {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Fit standard laptop / desktop screens vertically */
+@media (max-height: 800px) {
+  .game-navbar {
+    height: 66px;
+  }
+
+  .game-layout {
+    padding-top: 9px;
+    gap: 15px;
+    grid-template-columns: 235px minmax(0, 1fr);
+  }
+
+  .player-panel {
+    padding: 9px;
+  }
+
+  .avatar-ring {
+    width: 76px;
+    height: 76px;
+    margin-top: 7px;
+    margin-bottom: 4px;
+  }
+
+  .player-name {
+    font-size: 22px;
+  }
+
+  .player-subtitle {
+    margin-bottom: 6px;
+  }
+
+  .stat-card {
+    min-height: 41px;
+    margin-top: 5px;
+    padding: 5px 8px;
+  }
+
+  .mission-row h1 {
+    font-size: 31px;
+  }
+
+  .timer-card {
+    min-height: 62px;
+  }
+
+  .progress-heading {
+    margin-top: 7px;
+  }
+
+  .puzzle-card {
+    margin-top: 8px;
+    padding: 10px 13px;
+    column-gap: 17px;
+  }
+
+  .puzzle-card-heading {
+    margin-bottom: 7px;
+  }
+
+  .puzzle-mini-icon {
+    width: 33px;
+    height: 33px;
+    font-size: 18px;
+  }
+
+  .puzzle-card-heading h2 {
+    font-size: 20px;
+  }
+
+  .api-puzzle-image {
+    max-height: min(34vh, 225px);
+  }
+
+  .answer-section > input {
+    height: 39px;
+  }
+
+  .submit-answer {
+    min-height: 38px;
+    margin-top: 8px;
+  }
+}
+
+
+/* ===== Screenshot-matched desktop game layout ===== */
+
+.game-layout {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 12px 2%;
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+/* Wider player profile */
+.player-panel {
+  width: 100%;
+  padding: 15px;
+}
+
+/* Mission area */
+.game-content {
+  width: 100%;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.mission-row h1 {
+  font-size: clamp(30px, 2.5vw, 39px);
+}
+
+.progress-heading {
+  margin-top: 10px;
+}
+
+/* White puzzle card: heading spans the top,
+   puzzle on the left, answer area on the right */
+.puzzle-card {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  margin-top: 10px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  column-gap: 20px;
+  align-items: center;
+  border-radius: 22px;
+  background: #fff;
+  color: #15344b;
+}
+
+/* Card heading */
+.puzzle-card-heading {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin-bottom: 10px;
+}
+
+/* Puzzle stays on the left */
+.puzzle-image-frame {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: start;
+  align-self: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d4e0e9;
+  border-radius: 14px;
+  background: #f7fafc;
+}
+
+.api-puzzle-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 34vh;
+  object-fit: contain;
+}
+
+/* Minion helper on the right, above the answer */
+.game-minion-helper {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: center;
+  align-self: start;
+  width: 145px;
+  height: 125px;
+  margin: 0 0 4px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Answer area sits on the right, below the Minion */
+.answer-section {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: end;
+  justify-self: stretch;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 0 12px 18px;
+  border-left: 2px solid #e3eaf0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.answer-section > label {
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.answer-section > input {
+  width: 100%;
+  height: 48px;
+  font-size: 23px;
+}
+
+.number-keypad {
+  display: none !important;
+}
+
+.submit-answer {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 10px;
+}
+
+/* Keep the game compact on shorter desktop screens */
+@media (max-height: 820px) {
+  .game-navbar {
+    height: 70px;
+  }
+
+  .game-layout {
+    padding-top: 9px;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .player-panel {
+    padding: 12px;
+  }
+
+  .avatar-ring {
+    width: 88px;
+    height: 88px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+  }
+
+  .stat-card {
+    min-height: 44px;
+    margin-top: 5px;
+    padding: 6px 9px;
+  }
+
+  .mission-row h1 {
+    font-size: 32px;
+  }
+
+  .timer-card {
+    min-height: 65px;
+  }
+
+  .progress-heading {
+    margin-top: 7px;
+  }
+
+  .puzzle-card {
+    margin-top: 8px;
+    padding: 10px 14px;
+    column-gap: 15px;
+  }
+
+  .puzzle-card-heading {
+    margin-bottom: 6px;
+  }
+
+  .game-minion-helper {
+    width: 120px;
+    height: 100px;
+  }
+
+  .api-puzzle-image {
+    max-height: 30vh;
+  }
+
+  .answer-section {
+    padding-left: 12px;
+    padding-bottom: 5px;
+  }
+
+  .answer-section > input {
+    height: 42px;
+  }
+
+  .submit-answer {
+    min-height: 42px;
+    margin-top: 8px;
+  }
+
+  /* Authoritative layout rules: keep the puzzle and answer areas in separate
+     grid tracks and let the card use only the available viewport space. */
+  @media (min-width: 681px) {
+    .banana-game {
+      height: 100dvh;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .game-navbar {
+      height: 76px;
+    }
+
+    .game-layout {
+      height: calc(100dvh - 76px);
+      min-height: 0;
+      padding: 12px 2%;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .player-panel,
+    .game-content {
+      min-height: 0;
+    }
+
+    .game-content {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .puzzle-card {
+      flex: 1 1 auto;
+      height: auto;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(250px, 0.8fr);
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 12px 20px;
+      padding: 14px 18px;
+      overflow: hidden;
+    }
+
+    .puzzle-card-heading {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      min-width: 0;
+      margin: 0;
+    }
+
+    .puzzle-image-frame {
+      grid-column: 1;
+      grid-row: 2;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      margin: 0;
+      justify-self: stretch;
+      align-self: stretch;
+    }
+
+    .api-puzzle-image {
+      width: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .answer-column {
+      grid-column: 2;
+      grid-row: 2;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      max-width: none;
+      margin: 0;
+      padding: 0 0 0 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      border-left: 2px solid #e3eaf0;
+    }
+
+    .game-minion-helper {
+      width: min(120px, 42%);
+      height: auto;
+      max-height: 110px;
+      margin: 0 auto 10px;
+      flex: 0 1 auto;
+    }
+
+    .answer-column .answer-section {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .banana-game {
+      min-height: 100dvh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .game-layout {
+      height: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .game-content {
+      overflow: visible;
+    }
+
+    .puzzle-card {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow: visible;
+    }
+
+    .puzzle-card-heading,
+    .puzzle-image-frame,
+    .answer-column {
+      width: 100%;
+      min-width: 0;
+    }
+
+    .puzzle-image-frame {
+      height: auto;
+      min-height: 140px;
+      margin: 0;
+    }
+
+    .api-puzzle-image {
+      max-width: 100%;
+      max-height: 32vh;
+    }
+
+    .answer-column {
+      height: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 14px 0 0;
+      display: flex;
+      flex-direction: column;
+      border-top: 2px solid #e3eaf0;
+      border-left: 0;
+    }
+
+    .game-minion-helper {
+      width: 80px;
+      height: auto;
+      max-height: 70px;
+      margin: 0 auto 6px;
+    }
+
+    .answer-column .answer-section {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  /* Final responsive alignment */
+  @media (min-width: 901px) {
+    .banana-game {
+      height: 100vh;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .game-navbar {
+      height: 76px;
+    }
+
+    .game-layout {
+      height: calc(100vh - 76px);
+      min-height: 0;
+      padding: clamp(10px, 1.5vh, 18px) 2%;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: clamp(14px, 1.8vw, 24px);
+    }
+
+    .player-panel,
+    .game-content {
+      min-height: 0;
+    }
+
+    .game-content {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .puzzle-card {
+      flex: 1 1 auto;
+      min-height: 0;
+      max-height: 100%;
+      grid-template-columns: minmax(0, 1.15fr) minmax(250px, 0.85fr);
+      grid-template-rows: auto minmax(0, 1fr);
+      column-gap: clamp(16px, 2vw, 30px);
+      overflow: hidden;
+    }
+
+    .puzzle-card-heading {
+      min-width: 0;
+    }
+
+    .puzzle-image-frame {
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      justify-self: stretch;
+      align-self: stretch;
+    }
+
+    .api-puzzle-image {
+      width: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .answer-column,
+    .puzzle-card > .answer-section {
+      grid-column: 2;
+      grid-row: 2;
+      min-width: 0;
+      min-height: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 0 0 clamp(12px, 1.5vw, 24px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      border-left: 2px solid #e3eaf0;
+    }
+
+    .answer-column .game-minion-helper {
+      width: min(42%, 120px);
+      height: auto;
+      max-height: 110px;
+      margin: 0 auto 8px;
+      flex-shrink: 0;
+    }
+
+    .answer-column .answer-section {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border-left: 0;
+    }
+
+    .puzzle-card > .answer-section {
+      align-self: center;
+      height: auto;
+    }
+
+    .answer-section > input {
+      height: clamp(40px, 7vh, 52px);
+    }
+
+    .submit-answer {
+      min-height: clamp(40px, 7vh, 50px);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .banana-game {
+      min-height: 100dvh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .game-layout {
+      grid-template-columns: 220px minmax(0, 1fr);
+      padding: 12px;
+      gap: 12px;
+    }
+
+    .puzzle-card {
+      grid-template-columns: minmax(0, 1fr) minmax(210px, 0.8fr);
+      column-gap: 14px;
+      padding: 12px;
+    }
+
+    .answer-column,
+    .puzzle-card > .answer-section {
+      padding-left: 12px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .banana-game {
+      overflow-y: auto;
+    }
+
+    .game-navbar {
+      height: auto;
+      min-height: 76px;
+      grid-template-columns: 1fr auto;
+      padding: 9px 14px;
+    }
+
+    .game-nav-links {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      justify-content: space-between;
+      gap: 2px;
+    }
+
+    .game-nav-links button {
+      flex: 1;
+      padding: 9px 5px;
+      font-size: 12px;
+    }
+
+    .game-layout {
+      height: auto;
+      grid-template-columns: 1fr;
+      padding: 12px;
+    }
+
+    .player-panel {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 8px 14px;
+      text-align: left;
+    }
+
+    .profile-heading,
+    .mission-note {
+      grid-column: 1 / -1;
+    }
+
+    .avatar-ring {
+      grid-row: span 3;
+      margin: 0;
+    }
+
+    .player-name,
+    .player-subtitle {
+      margin: 0;
+    }
+
+    .stat-card {
+      margin-top: 0;
+    }
+
+    .game-content {
+      overflow: visible;
+    }
+
+    .mission-row {
+      align-items: flex-start;
+    }
+
+    .mission-row h1 {
+      font-size: clamp(25px, 7vw, 32px);
+    }
+
+    .timer-card {
+      min-width: 82px;
+    }
+
+    .puzzle-card {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px;
+      overflow: visible;
+    }
+
+    .puzzle-card-heading,
+    .puzzle-image-frame,
+    .answer-column,
+    .puzzle-card > .answer-section {
+      width: 100%;
+    }
+
+    .puzzle-image-frame {
+      height: auto;
+      min-height: 150px;
+      align-self: auto;
+    }
+
+    .api-puzzle-image {
+      max-height: 32vh;
+    }
+
+    .answer-column,
+    .puzzle-card > .answer-section {
+      height: auto;
+      min-height: 0;
+      padding: 14px 0 0;
+      border-top: 2px solid #e3eaf0;
+      border-left: 0;
+    }
+
+    .answer-column .game-minion-helper {
+      width: 80px;
+      max-height: 70px;
+    }
+  }
+}
+
+/* Move the answer section closer to the puzzle */
+.puzzle-card {
+grid-template-columns: minmax(0, 0.7fr) minmax(280px, 0.3fr);  column-gap: 12px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+.puzzle-image-frame {
+  justify-self: start;
+  margin-left: 0;
+}
+
+.answer-column {
+  justify-self: start;
+  width: 100%;
+  max-width: 480px;
+  padding-left: 12px;
+  margin-left: 0;
+}
+
+/* Keep the Minion and answer controls compact */
+.game-minion-helper {
+  width: 90px;
+  height: 72px;
+  margin: 0 auto 2px;
+}
+
+.answer-section {
+  width: 100%;
+}
+
+.answer-section > input {
+  height: 42px;
+}
+
+.submit-answer {
+  min-height: 42px;
+  margin-top: 8px;
+}
+
+/* =========================================
+   FINAL GAME LAYOUT — aligned and compact
+   Replace the old overrides at the bottom
+   of Game.css with this block.
+   ========================================= */
+
+@media (min-width: 901px) {
+  .banana-game {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .game-navbar {
+    height: 68px;
+  }
+
+  .game-layout {
+    width: 100%;
+    height: calc(100dvh - 68px);
+    min-height: 0;
+    padding: 10px 2%;
+    display: grid;
+    grid-template-columns: minmax(285px, 24%) minmax(0, 1fr);
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  /* Wider profile, with smaller text and tighter spacing */
+  .player-panel {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: 12px;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .profile-heading {
+    font-size: 10px;
+    gap: 5px;
+  }
+
+  .difficulty-badge {
+    padding: 7px 9px;
+    font-size: 9px;
+  }
+
+  .avatar-ring {
+    width: 76px;
+    height: 76px;
+    margin: 7px auto 4px;
+  }
+
+  .player-name {
+    margin: 4px 0 2px;
+    font-size: 21px;
+  }
+
+  .player-subtitle {
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+
+  .stat-card {
+    min-height: 40px;
+    margin-top: 5px;
+    padding: 5px 8px;
+    gap: 8px;
+  }
+
+  .stat-icon {
+    width: 23px;
+    font-size: 18px;
+  }
+
+  .stat-card small {
+    font-size: 8px;
+  }
+
+  .stat-card strong {
+    font-size: 17px;
+  }
+
+  .lives-card strong {
+    font-size: 14px;
+  }
+
+  .mission-note {
+    margin-top: 7px;
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .mission-note span {
+    font-size: 16px;
+  }
+
+  /* Main game area fills the remaining width */
+  .game-content {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .mission-row {
+    flex-shrink: 0;
+    gap: 10px;
+  }
+
+  .mission-label {
+    margin-bottom: 2px;
+    font-size: 10px;
+  }
+
+  .mission-row h1 {
+    font-size: clamp(25px, 2.1vw, 32px);
+    line-height: 1.08;
+  }
+
+  .mission-row p {
+    margin-top: 4px;
+    font-size: 12px;
+  }
+
+  .timer-card {
+    min-width: 94px;
+    min-height: 60px;
+    padding: 7px;
+    gap: 5px;
+  }
+
+  .timer-icon {
+    font-size: 17px;
+  }
+
+  .timer-card strong {
+    font-size: 21px;
+  }
+
+  .timer-card small {
+    font-size: 8px;
+  }
+
+  .progress-heading {
+    margin: 7px 0 5px;
+    font-size: 9px;
+  }
+
+  .progress-track {
+    height: 7px;
+    flex-shrink: 0;
+  }
+
+  /* Puzzle card: two balanced columns, no oversized gap */
+  .puzzle-card {
+    flex: 1 1 0;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-height: 100%;
+    margin-top: 8px;
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 10px 14px;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: 19px;
+  }
+
+  .puzzle-card-heading {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-width: 0;
+    margin: 0;
+    gap: 9px;
+  }
+
+  .puzzle-mini-icon {
+    width: 33px;
+    height: 33px;
+    font-size: 18px;
+  }
+
+  .puzzle-card-heading h2 {
+    font-size: 20px;
+  }
+
+  .puzzle-card-heading p {
+    font-size: 10px;
+  }
+
+  /* Puzzle image uses the left column efficiently */
+  .puzzle-image-frame {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: stretch;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .api-puzzle-image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  /* Align Minion and answer controls in the right column */
+  .answer-column {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: stretch;
+    align-self: stretch;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0 0 0 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    border-left: 1px solid #e3eaf0;
+    overflow: hidden;
+  }
+
+  .answer-column .game-minion-helper {
+    display: block;
+    flex: 0 1 auto;
+    width: min(100px, 30%);
+    height: auto;
+    max-height: 85px;
+    object-fit: contain;
+    margin: 0 auto 5px;
+  }
+
+  .answer-column .answer-section {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: 0;
+  }
+
+  .answer-section > label {
+    margin-bottom: 6px;
+    font-size: 9px;
+    letter-spacing: 1.1px;
+  }
+
+  .answer-section > input {
+    width: 100%;
+    height: 42px;
+    min-height: 0;
+    padding: 5px 10px;
+    font-size: 20px;
+  }
+
+  .submit-answer {
+    width: 100%;
+    min-height: 42px;
+    margin-top: 8px;
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+
+  .answer-feedback {
+    margin-top: 5px;
+    font-size: 10px;
+  }
+
+  .number-keypad {
+    display: none !important;
+  }
+}
+
+/* Smaller laptops and tablets */
+@media (min-width: 681px) and (max-width: 900px) {
+  .game-layout {
+    grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .player-panel {
+    padding: 9px;
+  }
+
+  .player-name {
+    font-size: 19px;
+  }
+
+  .puzzle-card {
+    grid-template-columns: minmax(0, 1fr) minmax(180px, 0.85fr);
+    gap: 9px;
+    padding: 10px;
+  }
+
+  .answer-column {
+    padding-left: 9px;
+  }
+
+  .answer-column .game-minion-helper {
+    width: 75px;
+    max-height: 65px;
+  }
+
+  .mission-row h1 {
+    font-size: 25px;
+  }
+}
+
+/* Mobile layout: stack sections vertically */
+@media (max-width: 680px) {
+  .banana-game {
+    height: auto;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .game-navbar {
+    height: auto;
+    min-height: 68px;
+    grid-template-columns: 1fr auto;
+    padding: 8px 12px;
+  }
+
+  .brand-words strong {
+    font-size: 22px;
+  }
+
+  .game-nav-links {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+    gap: 2px;
+  }
+
+  .game-nav-links button {
+    flex: 1;
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+
+  .game-layout {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .player-panel {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 7px 12px;
+    text-align: left;
+  }
+
+  .profile-heading,
+  .mission-note {
+    grid-column: 1 / -1;
+  }
+
+  .avatar-ring {
+    grid-row: span 3;
+    margin: 0;
+  }
+
+  .player-name,
+  .player-subtitle {
+    margin: 0;
+  }
+
+  .stat-card {
+    margin-top: 0;
+  }
+
+  .game-content {
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .mission-row {
+    align-items: flex-start;
+  }
+
+  .mission-row h1 {
+    font-size: clamp(23px, 6vw, 30px);
+  }
+
+  .timer-card {
+    min-width: 80px;
+  }
+
+  .puzzle-card {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+    overflow: visible;
+  }
+
+  .puzzle-card-heading,
+  .puzzle-image-frame,
+  .answer-column {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .puzzle-image-frame {
+    height: auto;
+    min-height: 140px;
+    align-self: auto;
+  }
+
+  .api-puzzle-image {
+    max-width: 100%;
+    max-height: 35vh;
+  }
+
+  .answer-column {
+    height: auto;
+    min-height: 0;
+    padding: 12px 0 0;
+    border-top: 1px solid #e3eaf0;
+    border-left: 0;
+    overflow: visible;
+  }
+
+  .answer-column .game-minion-helper {
+    width: 75px;
+    max-height: 65px;
+    margin-bottom: 5px;
+  }
+}

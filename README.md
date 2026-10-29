@@ -13,7 +13,7 @@ Banana Brain Quest is a Minion-themed maths puzzle game built as a university so
 
 ## Development status
 
-The project is in active development. The login, registration, welcome, and challenge-selection experience is currently implemented. Puzzle gameplay and the remaining game pages are still being developed.
+The project is in active development. The login, registration, welcome, challenge-selection, and live puzzle gameplay experience is currently implemented. History and leaderboard pages are still being developed.
 
 ## Implemented features
 
@@ -22,18 +22,27 @@ The project is in active development. The login, registration, welcome, and chal
 - Demo account persistence using browser `localStorage`
 - Welcome screen after successful registration or login
 - Challenge selection page with Easy, Medium, and Hard difficulties
-- Difficulty-specific timer and life descriptions
-- Responsive styling for the main screens
+- Live maths puzzle loading from the Banana API
+- Difficulty-specific countdown timers, lives, scoring, progress, and banana rewards
+- Number keypad, answer validation, feedback, victory, and game-over states
+- Responsive Minion-themed game page with factory background
+- Responsive styling across the main screens
 - React/Vite development and production build setup
 
 ## In progress
 
-- Maths puzzle gameplay screen
-- Question generation, scoring, timers, lives, and banana rewards
 - History and leaderboard pages
 - Player profile and persistent game progress
 - Production-ready authentication and data storage
 - Final UI polish, accessibility review, and testing
+
+## Puzzle API
+
+The game requests fresh puzzle images and numeric solutions from the University of Bedfordshire Banana API:
+
+`https://marcconrad.com/uob/banana/api.php?out=json`
+
+If a browser environment blocks the request because of CORS, configure a Vite development proxy and keep the API request on the development server.
 
 ## Installation and setup
 
